@@ -28,7 +28,6 @@ def download_abi_data(year, month, day, hour, product='ABI-L2-CMIPC'):
 
     total_files = len(remote_fps)
     for i, remote_fp in enumerate(remote_fps):
-        remote_fp = remote_fps[0]
         file_base_path =  '/'.join(remote_fp.split(os.sep)[:-1])
         path = f'{base_path}/data/{file_base_path}'
         local_fp = f"{path}/{remote_fp.split(os.sep)[-1]}"
