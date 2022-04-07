@@ -14,17 +14,19 @@ def get_julian_day(year, month, day):
     return str(fmt_date.timetuple().tm_yday).zfill(3)
 
 
-def download_abi_data(year, month, day, hour, product='ABI-L2-CMIPC'):
+def download_abi_data(year, month, day, hour, product='ABI-L2-CMIPC', channel=13):
     if isinstance(year, int): year = str(year)
     if isinstance(month, int): month = str(month).zfill(2)
     if isinstance(day, int): day = str(day).zfill(2)
     if isinstance(hour, int): hour = str(hour).zfill(2)
+    if isinstance(channel, int): channel = str(channel).zfill(2)
 
     julian_day = get_julian_day(year, month, day)
 
     fs = s3fs.S3FileSystem(anon=True)
 
     remote_fps = fs.ls(f's3://noaa-goes16/{product}/{year}/{julian_day}/{hour}')
+    remote_fps = list(filter(lambda fn: f'OR_ABI-L2-CMIPC-M6C{channel}' in fn, remote_fps))
 
     total_files = len(remote_fps)
     for i, remote_fp in enumerate(remote_fps):
