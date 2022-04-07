@@ -40,4 +40,6 @@ def download_abi_data(year, month, day, hour, product='ABI-L2-CMIPC'):
             print(f"[INFO] - Downloading {i+1}/{total_files}: {remote_fp}")
             fs.get(remote_fp, local_fp)
 
-download_abi_data(2020, 8, 14, 0)
+
+if __name__ == "__main__":
+    download_abi_data(2020, 8, 14, 0)
