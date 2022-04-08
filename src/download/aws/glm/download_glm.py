@@ -42,4 +42,5 @@ def download_glm_data(year, month, day, hour, product='GLM-L2-LCFA'):
 
 
 if __name__ == "__main__":
-    download_glm_data(2020, 8, 14, 0)
+    for i in range(0, 24):
+        download_glm_data(2020, 8, 14, i)
