@@ -2,7 +2,7 @@ import s3fs
 import datetime as dt
 import os
 
-base_path = "/home/adriano/eda-goes16"
+base_path = "/datalake/goes16"
 
 
 def get_julian_day(year, month, day):
@@ -44,5 +44,6 @@ def download_abi_data(year, month, day, hour, product='ABI-L2-CMIPF', channel=13
 
 
 if __name__ == "__main__":
-    for i in range(0, 24):
-        download_abi_data(2020, 8, 14, 0)
+    for day in (14, 15):
+        for hour in range(0, 24):
+            download_abi_data(2020, 8, day, hour)
